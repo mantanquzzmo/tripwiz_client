@@ -4,7 +4,8 @@ import {
   getActivities,
   getRestaurants,
   getHotels,
-  getTrip
+  getTrip,
+  objectEraser
 } from "../modules/destination.js";
 import { Button } from "semantic-ui-react";
 import { connect } from "react-redux";
@@ -16,10 +17,9 @@ const TripsList = props => {
 
   const getTripsData = async () => {
     let response = await getTrips();
-    if (response.status === 200) {
-      let response2 = await getTrip(response.data[0].id);
-      props.setSelectedCard(response2.data)
-      debugger;
+    if (response.status === 200 && response.data.length > 0) {
+      let response2 = await getTrip(response.data[response.data.length - 1].id);
+      props.setSelectedCard(response2.data);
       props.setTrips(response.data);
       setGotTrips(true);
     }
@@ -27,29 +27,39 @@ const TripsList = props => {
 
   const onClickHandler = async event => {
     let response = await getTrip(event);
-    debugger
     props.setSelectedCard(response.data);
   };
 
   const onButtonHandler = async () => {
-    props.setTrip(props.selectedCard.trip.id);
-    props.setLng(props.selectedCard.trip.lng);
-    props.setLat(props.selectedCard.trip.lat);
-    props.setDays(props.selectedCard.trip.days);
-    props.setDestination(props.selectedCard.trip.destination);
-    let response = await getActivities(props.selectedCard.trip.id);
-    if (response.status === 200) {
-      props.setActivities(response.data);
-    }
-    let response2 = await getRestaurants(props.selectedCard.trip.id);
-    if (response2.status === 200) {
-      props.setRestaurants(response2.data);
-    }
-    let response3 = await getHotels(props.selectedCard.trip.id);
-    if (response3.status === 200) {
-      props.setHotels(response3.data);
+    if (props.selectedCard) {
+      props.setTrip(props.selectedCard.trip.id);
+      props.setLng(props.selectedCard.trip.lng);
+      props.setLat(props.selectedCard.trip.lat);
+      props.setDays(props.selectedCard.trip.days);
+      props.setDestination(props.selectedCard.trip.destination);
+      props.setActivityType(Object.keys(props.selectedCard.activity)[0]);
+      let response = await getActivities(props.selectedCard.trip.id);
+      if (response.status === 200) {
+        props.setActivities(response.data);
+      }
+      let response2 = await getRestaurants(props.selectedCard.trip.id);
+      if (response2.status === 200) {
+        props.setRestaurants(response2.data);
+      }
+      let response3 = await getHotels(props.selectedCard.trip.id);
+      if (response3.status === 200) {
+        props.setHotels(response3.data);
+      }
     }
   };
+
+  const onDeleteHandler = async () => {
+      await objectEraser("trips", props.selectedCard.trip.id);
+      props.setSelectedCard(null)
+      props.setActivities(null)
+      setGotTrips(false)
+      getTripsData();
+  }
 
   useEffect(() => {
     getTripsData();
@@ -58,6 +68,7 @@ const TripsList = props => {
   useEffect(() => {
     generateCard(props.selectedCard);
     generateTripList(props.trips);
+    onButtonHandler();
   }, [gotTrips]);
 
   useEffect(() => {
@@ -74,18 +85,20 @@ const TripsList = props => {
       let activityInfo = props.selectedCard[tripParts[1]][activityParts[0]];
       let restaurantInfo = props.selectedCard[tripParts[1]][activityParts[1]];
       let hotelInfo = props.selectedCard[tripParts[2]];
-      debugger
+      let rating = props.selectedCard[tripParts[4]];
       tripCard = (
-        <div key={props.selectedCard.id} className={`trip-header`}>
+        <div key={props.selectedCard.trip.id} className={`trip-header`}>
           <div id="trip-card" className="ui card">
             <div className="image">
-              <img src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${props.selectedCard.image}&sensor=false&maxwidth=400&key=${process.env.REACT_APP_GOOGLE_APIKEY}`} />
+              <img
+                src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${props.selectedCard.image}&sensor=false&maxwidth=400&key=${process.env.REACT_APP_GOOGLE_APIKEY}`}
+              />
             </div>
-            <div className="content">
+            <div className="card-content">
               <div className="header">
                 {tripInfo.days} days in {tripInfo.destination}
               </div>
-              <div className="description">
+              <div className="card-description">
                 <p>
                   Visiting {activityInfo.length} {activityParts[0]}
                 </p>
@@ -98,12 +111,20 @@ const TripsList = props => {
                     ? "No hotel selected"
                     : `${hotelInfo[0].name} ${hotelInfo[0].price}`}
                 </p>
+                <p>User ratings: {rating} / 5</p>
               </div>
             </div>
             <div className="extra content">
               <Button color="blue" onClick={onButtonHandler}>
                 View trip
               </Button>
+              {props.authenticated && <button
+                id="remove-btn"
+                className="circular ui right floated red icon button"
+                onClick={onDeleteHandler}
+              >
+                <i id="remove-btn-image" class="trash alternate outline icon"></i>
+              </button>}
             </div>
           </div>
         </div>
@@ -115,7 +136,9 @@ const TripsList = props => {
   const generateTripList = () => {
     let tripHeaders;
     if (gotTrips && props.trips && props.selectedCard) {
-      let filteredList = props.trips.filter(trip => trip.id !== props.selectedCard.trip.id)
+      let filteredList = props.trips.filter(
+        trip => trip.id !== props.selectedCard.trip.id
+      );
       tripHeaders = filteredList.map(trip => {
         return (
           <div key={trip.id} className="trip-headers">
@@ -137,8 +160,9 @@ const TripsList = props => {
 
   return (
     <>
-      <div>
-        <h5 id="trips-column">Your Trips</h5>
+      <div>{viewCard && localStorage.getItem("J-sunkAuth-Storage") ? (
+        <h5 id="trips-column">Your Previous Trips</h5>) : (
+        <h5 id="trips-column">View Previous User Trips</h5>)} 
       </div>
       {viewList}
       {viewCard}
@@ -151,7 +175,8 @@ const mapStateToProps = state => {
     selectedCard: state.selectedCard,
     trips: state.trips,
     activityType: state.activityType,
-    restaurants: state.restaurants
+    restaurants: state.restaurants,
+    authenticated: state.authenticated
   };
 };
 
@@ -186,6 +211,9 @@ const mapDispatchToProps = dispatch => {
     },
     setDays: days => {
       dispatch({ type: "SET_DAYS", payload: days });
+    },
+    setActivityType: data => {
+      dispatch({ type: "GOT_ACTIVITYTYPE", payload: data });
     }
   };
 };

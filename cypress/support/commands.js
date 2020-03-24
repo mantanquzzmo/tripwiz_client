@@ -6,7 +6,7 @@ Cypress.Commands.add(
         return cb({ coords: { latitude, longitude } });
       });
     };
-    cy.visit("/", {
+    cy.visit("/trip", {
       onBeforeLoad: win => {
         mockGeolocation(win, latitude, longitude);
       }
@@ -123,7 +123,7 @@ Cypress.Commands.add("chooseRestaurants", () => {
 Cypress.Commands.add("login", () => {
   cy.server();
   cy.window().then(win => win.localStorage.setItem('J-sunkAuth-Storage', JSON.stringify({"access-token":"test","cache-control":"max-age=0, private, must-revalidate","client":"AnhjYMEU01hUInQIYhAUQg","content-type":"application/json; charset=utf-8","token-type":"Bearer","expiry":1582910341,"uid":"10158128379853993"})))
-  cy.visit("/");
+  cy.visit("/trip");
   cy.route({
     method: "GET",
     url: "v3.1/me?access_token*",

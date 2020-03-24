@@ -15,6 +15,7 @@ const Hotels = props => {
         props.updateProgression(props.progression + 1);
         props.setGotHotels(true);
         props.setMessage("Found Hotels!");
+        setHotelsMessage("");
       } else {
         setHotelsMessage("Couldn't find any hotels for that budget");
       }
@@ -62,6 +63,7 @@ const Hotels = props => {
         onClick={async () => {
           await objectEraser("activity_types", props.trip, "resturant");
           props.updateProgression(props.progression - 2);
+          setHotelsMessage("");
         }}
       >
         <Button.Content visible>Back one step</Button.Content>

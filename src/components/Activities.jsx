@@ -38,6 +38,7 @@ const Activities = props => {
         props.gotActivities(true);
         props.setMessage("Found activities!");
         props.updateProgression(props.progression + 1);
+        setActivitiesMessage("")
       } else {
         setActivitiesMessage(
           "Couldn't add activity, try something more popular"
@@ -78,6 +79,7 @@ const Activities = props => {
             onClick={async () => {
               await objectEraser("trips", props.trip);
               props.updateProgression(props.progression - 2);
+              setActivitiesMessage("")
             }}
           >
             <Button.Content visible>Back one step</Button.Content>

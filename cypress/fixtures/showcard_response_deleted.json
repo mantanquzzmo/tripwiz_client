@@ -1,0 +1,132 @@
+{
+  "trip": {
+      "id": 1,
+      "destination": "St Petersburg",
+      "lat": "41.9027835",
+      "lng": "12.4963655",
+      "created_at": "2020-02-14T16:25:41.937Z",
+      "updated_at": "2020-02-14T16:25:41.937Z",
+      "days": 3
+  },
+  "activity": {
+      "art_gallery": [
+          {
+              "id": 1,
+              "name": "makemake",
+              "address": "Via del Boschetto, 121, Roma",
+              "rating": "5",
+              "lat": "41.8954049",
+              "lng": "12.4910405",
+              "activity_type_id": 1,
+              "created_at": "2020-02-14T16:25:48.197Z",
+              "updated_at": "2020-02-14T16:25:48.197Z"
+          },
+          {
+              "id": 2,
+              "name": "Atelier Bomba",
+              "address": "Via dell'Oca, 39, Roma",
+              "rating": "4.8",
+              "lat": "41.909698",
+              "lng": "12.47565",
+              "activity_type_id": 1,
+              "created_at": "2020-02-14T16:25:48.209Z",
+              "updated_at": "2020-02-14T16:25:48.209Z"
+          },
+          {
+              "id": 3,
+              "name": "Galleria Vittoria",
+              "address": "Via Margutta, 103, Roma",
+              "rating": "4.6",
+              "lat": "41.90925979999999",
+              "lng": "12.478714",
+              "activity_type_id": 1,
+              "created_at": "2020-02-14T16:25:48.226Z",
+              "updated_at": "2020-02-14T16:25:48.226Z"
+          }
+      ],
+      "restaurant": [
+          {
+              "id": 4,
+              "name": "Valentyne Restaurant & Club",
+              "address": "Via della Fontanella, 15, Roma",
+              "rating": "4.9",
+              "lat": "41.909303",
+              "lng": "12.477555",
+              "activity_type_id": 2,
+              "created_at": "2020-02-14T16:26:15.806Z",
+              "updated_at": "2020-02-14T16:26:15.806Z"
+          },
+          {
+              "id": 5,
+              "name": "Etienne Roma Ristorante",
+              "address": "Via Scirè, 18, Roma",
+              "rating": "4.7",
+              "lat": "41.9298273",
+              "lng": "12.523409",
+              "activity_type_id": 2,
+              "created_at": "2020-02-14T16:26:15.814Z",
+              "updated_at": "2020-02-14T16:26:15.814Z"
+          },
+          {
+              "id": 6,
+              "name": "Crêpes Galettes Roma",
+              "address": "Via Leonina, 21/A, Roma",
+              "rating": "4.6",
+              "lat": "41.894833",
+              "lng": "12.4920896",
+              "activity_type_id": 2,
+              "created_at": "2020-02-14T16:26:15.819Z",
+              "updated_at": "2020-02-14T16:26:15.819Z"
+          },
+          {
+              "id": 7,
+              "name": "I Fratelli, Restaurant Pizzería",
+              "address": "Via degli Umbri, 14, Roma",
+              "rating": "4.4",
+              "lat": "41.8975559",
+              "lng": "12.5138248",
+              "activity_type_id": 2,
+              "created_at": "2020-02-14T16:26:16.826Z",
+              "updated_at": "2020-02-14T16:26:16.826Z"
+          }
+      ]
+  },
+  "hotels": [
+      {
+          "id": 1,
+          "name": "Condotti Boutique Hotel",
+          "lat": 41.9062,
+          "lng": 12.48074,
+          "price": "786.00",
+          "address": "VIA MARIO DE FIORI 37",
+          "url": "NOREF INCL BKFST AND FREE WIFI \nStd Main Buildng-14m2-Double Bed-FREE HS WIFI Safe-Minibar-Flat \nSat TV-Desk-Phone-AC Std Main Buildng-14m2-Double Bed-FREE HS",
+          "created_at": "2020-02-14T16:25:53.038Z",
+          "updated_at": "2020-02-14T16:25:53.038Z",
+          "trip_id": 1
+      },
+      {
+          "id": 2,
+          "name": "Hotel Siena",
+          "lat": 41.90357,
+          "lng": 12.48343,
+          "price": "121.67",
+          "address": "VIA SANT ANDREA",
+          "url": "BEST RATE -NOT REFUNDABLE \nSINGLE ROOM*10SQM*WIFI*AC *SATELLITE TV*MINIBAR*TELEPHONE \nSOUNDPROOF*SHOWER* SATELLITE CHANNELS*MINIBAR*WAKE UP SERVICE*",
+          "created_at": "2020-02-14T16:25:53.049Z",
+          "updated_at": "2020-02-14T16:25:53.049Z",
+          "trip_id": 1
+      },
+      {
+          "id": 3,
+          "name": "ROME STYLE HOTEL",
+          "lat": 41.90338,
+          "lng": 12.48513,
+          "price": "249.00",
+          "address": "VIA DEI DUE MACELLI 106",
+          "url": "Best Available rate wtih\nbreakast and WiFi included\nClassic Double",
+          "created_at": "2020-02-14T16:25:53.053Z",
+          "updated_at": "2020-02-14T16:25:53.053Z",
+          "trip_id": 1
+      }
+  ]
+}

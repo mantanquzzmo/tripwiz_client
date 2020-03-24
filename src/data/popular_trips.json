@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Vancouver",
+    "image": "../screenshots/vancouver.png",
+    "type": "Museums"
+  },
+  {
+    "id": 2,
+    "name": "Dubai",
+    "image": "../screenshots/dubai.png",
+    "type": "Water Parks"
+  },
+  {
+    "id": 3,
+    "name": "New York",
+    "image": "../screenshots/newyork.png",
+    "type": "Art Gallery"
+  },
+  {
+    "id": 4,
+    "name": "Rome",
+    "image": "../screenshots/rome.png",
+    "type": "Museums"
+  },
+  {
+    "id": 5,
+    "name": "Tokyo",
+    "image": "../screenshots/tokyo.png",
+    "type": "Night Clubs"
+  }
+]

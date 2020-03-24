@@ -26,19 +26,23 @@ const Destination = props => {
 
   const submitPlace = async e => {
     e.preventDefault();
-    let response = await getCoords(e.target.place.value);
-    if (!response.error) {
-      if (response.data.status !== "ZERO_RESULTS") {
-        response = response.data.results[0];
-        props.setLat(response.geometry.location.lat);
-        props.setLng(response.geometry.location.lng);
-        props.updateProgression(props.progression + 1);
-        props.setMessage("Destination successfully selected");
+    if (e.target.place.value !== "") {
+      let response = await getCoords(e.target.place.value);
+      if (!response.error) {
+        if (response.data.status !== "ZERO_RESULTS") {
+          response = response.data.results[0];
+          props.setLat(response.geometry.location.lat);
+          props.setLng(response.geometry.location.lng);
+          props.updateProgression(props.progression + 1);
+          props.setMessage("Destination successfully selected");
+        } else {
+          props.setMessage("Can't go there. Zero Results");
+        }
       } else {
-        props.setMessage("Can't go there. Zero Results");
+        props.setMessage(response.message);
       }
     } else {
-      props.setMessage(response.message);
+      props.setMessage("Must add a destination!");
     }
   };
 
@@ -50,6 +54,7 @@ const Destination = props => {
         props.setTrip(response.data.id);
         props.setMessage("");
         props.updateProgression(props.progression + 1);
+        setAlert("");
       } else {
         props.setMessage("Something went wrong.");
       }
@@ -63,16 +68,20 @@ const Destination = props => {
       {props.progression === 0 && (
         <>
           <h2>Let's get started...</h2>
-          <h5 id="space-below">To start planning your trip, pick a spot on the map below!</h5>
+          <h5 id="space-below">
+            To start planning your trip, pick a spot on the map below!
+          </h5>
           <div id="space-below" className="zoom">
-            <Link className="hidden content"
+            <Link
+              className="hidden content"
               id="scroll"
               activeClass="active"
               to="embed-map-dest"
               spy={true}
               smooth={true}
               offset={20}
-              duration={500}>
+              duration={500}
+            >
               <i aria-hidden="true" className="angle double down big icon"></i>
             </Link>
           </div>
@@ -109,12 +118,17 @@ const Destination = props => {
             }}
           />
           {alert}
-          <Button animated id="back-button-1"
-            onClick={() => props.updateProgression(props.progression - 1)}
+          <Button
+            animated
+            id="back-button-1"
+            onClick={() => {
+              props.updateProgression(props.progression - 1);
+              props.setMessage("");
+            }}
           >
             <Button.Content visible>Back one step</Button.Content>
             <Button.Content hidden>
-              <Icon name='arrow left' />
+              <Icon name="arrow left" />
             </Button.Content>
           </Button>
         </div>

@@ -1,7 +1,7 @@
 describe("User can submit destination", () => {
   beforeEach(() => {
     cy.server();
-    cy.visit("/");
+    cy.visit("/trip");
   });
 
   it("successfully", () => {

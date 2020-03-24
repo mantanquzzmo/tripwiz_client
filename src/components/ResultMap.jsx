@@ -42,13 +42,31 @@ const ResultMap = props => {
     });
   }
 
+  if (props.hotels) {
+    marker = props.hotels.map(hotel => {
+      return (
+        <Marker
+          key={hotel.id}
+          name={hotel.name}
+          onClick={onMarkerClick}
+          position={{ lat: hotel.lat, lng: hotel.lng }}
+          icon={{
+            url: `/mapIcons/hotel.png`,
+            scaledSize: new props.google.maps.Size(40, 40)
+          }}
+        />
+      );
+    });
+    activityMarkers.push(marker);
+  }
+
   return (
     <>
       <h3 id="divider">Your Map</h3>
       <div id="result-map">
         <Map
           google={props.google}
-          zoom={12}
+          zoom={13}
           initialCenter={{ lat: props.lat, lng: props.lng }}
           center={{ lat: props.lat, lng: props.lng }}
           style={{ width: "97%", height: "80%", position: "relative" }}
@@ -71,7 +89,8 @@ const mapStateToProps = state => {
     trip: state.trip,
     lat: state.lat,
     lng: state.lng,
-    activities: state.activities
+    activities: state.activities,
+    hotels: state.hotels
   };
 };
 

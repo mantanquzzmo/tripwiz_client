@@ -6,8 +6,10 @@ const sliderChoice = event => {
   let divId = `${event.target.name}${event.target.value}`;
   if (event.target.name === "hotel") {
     document.getElementById(divId).style.color = "gold";
-  } else {
+  } else if (event.target.name === "food") {
     document.getElementById(divId).style.color = "green";
+  } else {
+    document.getElementById(divId).style.color = "blue";
   }
 };
 

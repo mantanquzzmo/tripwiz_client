@@ -5,8 +5,8 @@
         "name": "Vasa Gallery",
         "address": "Galärvarvsvägen 14, Stockholm",
         "rating": "4.7",
-        "lat": "59.3280233",
-        "lng": "18.0913964",
+        "lat": "41.8954049",
+        "lng": "12.4610405",
         "activity_type_id": 54,
         "created_at": "2020-02-11T21:08:21.841Z",
         "updated_at": "2020-02-11T21:08:21.841Z"
@@ -16,8 +16,8 @@
         "name": "The Royal Palace Gallery",
         "address": "Slottsbacken 1, Stockholm",
         "rating": "4.5",
-        "lat": "59.3268215",
-        "lng": "18.0717194",
+        "lat": "41.8975559",
+        "lng": "12.5108248",
         "activity_type_id": 54,
         "created_at": "2020-02-11T21:08:21.866Z",
         "updated_at": "2020-02-11T21:08:21.866Z"
@@ -27,8 +27,8 @@
         "name": "Fotografiska Gallery",
         "address": "Stadsgårdshamnen 22, Stockholm",
         "rating": "4.5",
-        "lat": "59.3178415",
-        "lng": "18.0859104",
+        "lat": "41.9195559",
+        "lng": "12.4838248",
         "activity_type_id": 54,
         "created_at": "2020-02-11T21:08:21.894Z",
         "updated_at": "2020-02-11T21:08:21.894Z"

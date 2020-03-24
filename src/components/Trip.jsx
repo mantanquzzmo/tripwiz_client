@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Restaurants from "./Restaurants";
 import Hotels from "./Hotels";
@@ -7,8 +7,8 @@ import Destination from "./Destination";
 import FacebookLogin from "./FacebookLogin";
 
 const Trip = props => {
-  let currentView;
 
+  let currentView;
   switch (true) {
     case props.progression === -1:
       currentView = <FacebookLogin />;
@@ -28,6 +28,10 @@ const Trip = props => {
     default:
       currentView = <Destination />;
   }
+
+  useEffect(() => {
+    props.setCurrentRoute("trip");
+  }, [])
 
   return (
     <>
@@ -51,4 +55,18 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Trip);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateProgression: value => {
+      dispatch({ type: "UPDATE_PROGRESSION", payload: value });
+    },
+    setCurrentRoute: route => {
+      dispatch({ type: "SET_CURRENROUTE", payload: route });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(Trip);

@@ -102,11 +102,26 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         trips: action.payload
       };
-      case "SET_RESTAURANTS":
-        return {
-          ...state,
-          restaurants: action.payload
-        };
+    case "SET_RESTAURANTS":
+      return {
+        ...state,
+        restaurants: action.payload
+      };
+    case "SET_CURRENTUSER":
+      return {
+        ...state,
+        currentUser: action.payload
+      };
+    case "SET_CURRENTROUTE":
+      return {
+        ...state,
+        currentRoute: action.payload
+      };
+    case "SET_LOGOUT":
+      return {
+        ...state,
+        logout: action.payload
+      };
     default:
       return {
         ...state

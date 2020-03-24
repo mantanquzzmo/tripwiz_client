@@ -16,7 +16,9 @@ const HotelsList = props => {
     if (response.status === 200) {
       props.setHotels(response.data);
       if (response.data.length > 1) {
-      setHotelMessage(`Here are the closest hotels to your activities. Please add one to your itinerary!`)
+        setHotelMessage(
+          `Here are the closest hotels to your activities. Please add one to your itinerary!`
+        );
       } else {
         setHotelMessage(
           `Ok, we've added ${response.data[0].name} to your itinerary`
@@ -25,7 +27,7 @@ const HotelsList = props => {
     }
   };
 
-  const selectHotel = async (hotelId) => {
+  const selectHotel = async hotelId => {
     let response = await chooseHotel(props.trip, hotelId);
     if (response.status === 200) {
       await getHotelsShowData();
@@ -34,9 +36,7 @@ const HotelsList = props => {
     }
   };
 
-  useEffect(() => {
-
-  }, [props.hotels]);
+  useEffect(() => {}, [props.hotels]);
 
   let hotelCard;
 
@@ -45,7 +45,9 @@ const HotelsList = props => {
       return (
         <div className="centerText">
           <div id="hotel-cards" key={hotel.id} className="ui card">
-            <div className="image"><img src={hotel.url} /></div>
+            <div className="image">
+              <img src={hotel.url} />
+            </div>
             <div className="content">
               <div className="header">{hotel.name}</div>
               <div className="description">
@@ -84,6 +86,10 @@ const HotelsList = props => {
           onClick={onMarkerClick}
           name={marker.name}
           position={{ lat: marker.lat, lng: marker.lng }}
+          icon={{
+            url: `/mapIcons/hotel.png`,
+            scaledSize: new props.google.maps.Size(40, 40)
+          }}
         />
       );
     });
